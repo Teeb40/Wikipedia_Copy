@@ -2,9 +2,10 @@ from django.shortcuts import render,HttpResponse,HttpResponseRedirect
 from django.urls import reverse
 from . import util
 from django import forms
-
+import random
 
 def index(request):
+    
     if request.method == "POST":
         search = request.POST['q']
         search = str(search).strip()
@@ -17,15 +18,16 @@ def index(request):
                     results.add(i)
                
             return render(request, "encyclopedia/results.html",
-                          {"results":results,"search":search})
+                          {"results":results,"search":search,"entry_":random.choice(util.list_entries())})
         
         
     return render(request, "encyclopedia/index.html", {
-        "entries": util.list_entries()
+        "entries": util.list_entries(),"entry_":random.choice(util.list_entries())
     })
 
 
 def title_(request,title):
+    
     if util.get_entry(title) == None:
         return render(request, "encyclopedia/NotFound.html", {"name":title})
     else:
@@ -46,6 +48,13 @@ def entry(request):
         else:
             # request.session['page'] = page
             return render(request, "encyclopedia/entry.html", {
-                "page": page,"heading":heading
+                "page": page,"heading":heading,"entry_":random.choice(util.list_entries())
             })
     return render(request, "encyclopedia/entry.html")
+def edit(request,edit_page):
+    content = util.get_entry(edit_page)
+    for i in util.list_entries():
+        if str(edit_page).upper() == str(i).upper():
+            return render(request, "encyclopedia/entry.html", {"edit_page":edit_page,"content":content,"entry_":random.choice(util.list_entries())})
+            
+    return HttpResponse("Page Not Found")

@@ -23,7 +23,11 @@
                    <a href="{% url 'entry' %}">Create New Page</a>
                 </div>
                 <div>
-                    Random Page
+                   {% if entry_ %}
+                   <a href="{% url 'title' entry_ %}">Random Page</a>
+                   {% else %}
+                   Random Page
+                   {% endif %}
                 </div>
                 {% block nav %}
                 {% endblock %}
