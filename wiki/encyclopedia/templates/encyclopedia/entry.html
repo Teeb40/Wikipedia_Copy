@@ -6,13 +6,8 @@
 {% block body %}
 
     <form action="{% url 'entry' %}" method="post">
-    {% if edit_page %}
-    Heading: <input type="text" name="heading" placeholder="{{edit_page}}">
     
-    <textarea placeholder="MarkDown Content Here" name="wiki">
-    {{content}}
-    </textarea>
-    {% elif page %}
+    {% if page %}
     Heading: <input type="text" name="heading" placeholder="{{heading}}">
     <textarea textarea placeholder="MarkDown Content Here" name="wiki">
     {{page}}

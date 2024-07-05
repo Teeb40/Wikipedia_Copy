@@ -1,0 +1,31 @@
+{% extends "encyclopedia/layout.html" %}
+
+
+{% block body %}
+<form action="{% url 'edit' edit_page %}" method="post">
+    
+    
+    Heading: <input type="text" name="heading" placeholder="{{edit_page}}">
+    <textarea placeholder="MarkDown Content Here" name="wiki">
+    {{content}}
+    </textarea>
+   
+    
+    
+
+    
+   
+    
+    
+
+
+
+   
+
+
+    
+    <button name="save" value="saved">Save Page</button>
+    <input type="submit" name="submit" id="sendPaperButton" value="submit"/>
+    {% csrf_token %}
+    </form>
+{% endblock %}

@@ -28,7 +28,15 @@
                    {% else %}
                    Random Page
                    {% endif %}
+                   
                 </div>
+                {% if link%}
+                <div>
+                    
+                    <a href="{% url 'edit' link %}">Edit Page</a>
+                    
+                </div>
+                {% endif %}
                 {% block nav %}
                 {% endblock %}
             </div>
